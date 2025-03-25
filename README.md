@@ -6,6 +6,7 @@ This project consists of a FastAPI API for analyzing text toxicity and a Chrome 
 ## Project Structure:
 
 The project is organized as follows:
+
 Toxicity-Analyzer-Project/
 ├── api/ # FastAPI API code
 │ ├── app/ # FastAPI application code
