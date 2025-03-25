@@ -3,25 +3,6 @@
 
 This project consists of a FastAPI API for analyzing text toxicity and a Chrome extension that allows users to easily analyze selected text on any webpage using the API.
 
-## Project Structure:
-
-The project is organized as follows:
-
-'''
-Toxicity-Analyzer-Project/
-├── api/ # FastAPI API code
-│ ├── app/ # FastAPI application code
-│ │ ├── main.py # Contains the FastAPI app instance and endpoints
-│ │ └── init.py # (Optional, but good practice: can be empty)
-│ └── ... other API files ...
-├── extension/ # Chrome extension code
-│ ├── manifest.json # Describes the extension to Chrome
-│ ├── background.js # Background script for the extension
-│ ├── popup.html # (Optional) Popup HTML for the extension
-│ └── ... other extension files ...
-└── README.md 
-'''
-
 ## Prerequisites
 
 Before you begin, ensure you have the following installed:
