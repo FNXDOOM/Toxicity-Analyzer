@@ -7,6 +7,7 @@ This project consists of a FastAPI API for analyzing text toxicity and a Chrome 
 
 The project is organized as follows:
 
+'''
 Toxicity-Analyzer-Project/
 ├── api/ # FastAPI API code
 │ ├── app/ # FastAPI application code
@@ -19,7 +20,7 @@ Toxicity-Analyzer-Project/
 │ ├── popup.html # (Optional) Popup HTML for the extension
 │ └── ... other extension files ...
 └── README.md 
-
+'''
 
 ## Prerequisites
 
