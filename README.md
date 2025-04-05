@@ -1,103 +1,82 @@
+# Toxicity Analyzer
 
-# Toxicity Analyzer Project
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python Version](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
 
-This project consists of a FastAPI API for analyzing text toxicity and a Chrome extension that allows users to easily analyze selected text on any webpage using the API.
+A simple web application built with Gradio to analyze text input and predict scores for various types of toxicity using the `detoxify` library.
 
-## Prerequisites
+## Features
 
-Before you begin, ensure you have the following installed:
+*   Analyzes text for multiple toxicity categories:
+    *   Toxicity
+    *   Severe Toxicity
+    *   Obscene
+    *   Threat
+    *   Insult
+    *   Identity Hate
+*   Uses the pre-trained `'original'` model from the `detoxify` library.
+*   Provides an easy-to-use web interface powered by Gradio.
 
-*   **Python 3.7+**
-*   **pip** (Python package installer)
-*   **Google Chrome Browser**
+## Demo / Screenshot
 
-## Setting up the FastAPI API
+*(Optional: Add a screenshot of the Gradio interface here)*
+![Screenshot of Toxicity Analyzer Interface](link_to_your_screenshot.png)
+*Replace `link_to_your_screenshot.png` with an actual image URL or relative path if you add one to your repo.*
 
-1.  **Navigate to the API directory:**
+## Installation
 
+1.  **Clone the repository:**
     ```bash
-    cd Toxicity-Analyzer-Project/api
+    git clone https://github.com/FNXDOOM/Toxicity-Analyzer.git
+    cd Toxicity-Analyzer
     ```
 
 2.  **Create a virtual environment (recommended):**
-
     ```bash
     python -m venv venv
+    # On Windows
+    .\venv\Scripts\activate
+    # On macOS/Linux
+    source venv/bin/activate
     ```
 
-3.  **Activate the virtual environment:**
-
-    *   **On Windows:**
-
-        ```bash
-        .\venv\Scripts\activate
-        ```
-
-    *   **On macOS and Linux:**
-
-        ```bash
-        source venv/bin/activate
-        ```
-
-4.  **Install the required packages:**
-
+3.  **Install the required dependencies:**
     ```bash
-    pip install fastapi uvicorn
-    # or, for more complete functionality:
-    pip install fastapi[standard]
-    # or even for more complete functionality and optional dependencies
-    pip install fastapi[all]
+    pip install -r requirements.txt
     ```
+    *Note: This will install `torch`, `detoxify`, `gradio`, `transformers`, and their dependencies. `torch` can be a large download.*
 
-5.  **Run the FastAPI application:**
+## Usage
 
+1.  **Run the application:**
     ```bash
-    uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    python main.py
     ```
 
-    *   `app.main:app`: Specifies the module and object containing the FastAPI application.
-    *   `--host 0.0.0.0`:  Allows the API to be accessed from any IP address (important for the Chrome extension).
-    *   `--port 8000`:  Specifies the port number the API will listen on.
-    *   `--reload`: Enables automatic reloading of the server when code changes are detected (useful for development).
+2.  **Access the interface:**
+    *   The script will start a local web server and print the URL (usually `http://127.0.0.1:7860` or similar).
+    *   Open this URL in your web browser.
 
-    You should see output indicating that the Uvicorn server is running on `http://0.0.0.0:8000`.
+3.  **Analyze text:**
+    *   Enter the text you want to analyze into the input text box.
+    *   Click the "Submit" button (or wait if live updates are enabled).
+    *   The predicted toxicity scores for each category will be displayed.
 
-## Loading the Chrome Extension
+## How it Works
 
-1.  **Open Chrome and go to `chrome://extensions/`.**
-2.  **Enable "Developer mode"** in the top right corner.
-3.  **Click "Load unpacked".**
-4.  **Navigate to the `Toxicity-Analyzer-Project/extension` directory** and select it.
+This tool uses the `detoxify` library, which provides access to pre-trained models for toxicity classification. The `main.py` script loads the `'original'` `detoxify` model. When you input text through the Gradio interface, the script passes the text to the model, which returns prediction scores between 0 and 1 for each toxicity category. These scores are then displayed back in the Gradio interface.
 
-The "Toxicity Analyzer" extension should now be loaded.
+## Key Dependencies
 
-## Using the Chrome Extension
+*   [Detoxify](https://github.com/unitaryai/detoxify): The core library for toxicity detection.
+*   [Gradio](https://www.gradio.app/): Used to create the simple web UI.
+*   [PyTorch](https://pytorch.org/): The deep learning framework used by `detoxify`.
+*   [Transformers](https://huggingface.co/docs/transformers/index): Often used under the hood by libraries like `detoxify` for model loading and handling.
 
-1.  **Navigate to any website with text.**
-2.  **Select some text.**
-3.  **Right-click on the selected text.**
-4.  **Choose "Analyze Toxicity"** from the context menu.
-5.  **An alert box will appear, displaying the toxicity score** returned by the FastAPI API.
+## License
 
-## Troubleshooting
-
-*   **CORS Errors:** If you encounter CORS (Cross-Origin Resource Sharing) errors, ensure that:
-    *   The `origins` list in `api/app/main.py` includes `chrome-extension://YOUR_EXTENSION_ID`, replacing `YOUR_EXTENSION_ID` with the actual ID of your Chrome extension (found on the `chrome://extensions` page).
-    *   You have cleared your browser cache and restarted the Uvicorn server after making changes to the `origins` list.
-    *   `CORSMiddleware` is added to FastAPI before defining routes.
-*   **"Could not import module" Error:** If you get an error like "Could not import module 'app.main'", double-check that the `main.py` file is located in the correct directory and that you're running the `uvicorn` command from the `api` directory. Also, make sure the `__init__.py` file exists in the `app/` directory.
-*   **400 Bad Request Errors:** These can be caused by malformed requests. Ensure the API is running and the extension is sending the correct headers (especially the `Origin` header). Clear your browser cache.
-*   **Extension Not Loading:** Double-check the contents of `extension/manifest.json` for any errors. Make sure the file is valid JSON.
-
-## Customization
-
-*   **API Endpoint:** You can modify the `/analyze_toxicity` endpoint in `api/app/main.py` to implement your own toxicity analysis logic.
-*   **Extension Behavior:** You can modify `extension/background.js` to change the way the extension interacts with the API (e.g., display the results in a different format, send different data to the API).
-*   **UI:** You can customize the UI of the extension by modifying the `extension/popup.html` file.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Contributing
 
-Contributions are welcome! Please submit pull requests with bug fixes, new features, or improvements to the documentation.
-
-
-
+Contributions are welcome! Please feel free to submit a Pull Request or open an Issue if you find bugs or have suggestions for improvements.
