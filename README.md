@@ -21,8 +21,6 @@ A simple web application built with Gradio to analyze text input and predict sco
 
 ```bash
 Toxicity-Analyzer/
-├── .git/                     # Git version control data
-├── .gitignore                # Specifies intentionally untracked files
 ├── backend/                  # Contains the server-side application
 │   ├── main.py               # Python script running Gradio/Detoxify server
 │   ├── requirements.txt      # Python dependencies for the backend
@@ -74,6 +72,8 @@ Toxicity-Analyzer/
 1.  **Run the application:**
     ```bash
     python main.py
+    or
+    uvicorn main:app --reload
     ```
 
 2.  **Access the interface:**
@@ -83,7 +83,7 @@ Toxicity-Analyzer/
 3.  **Analyze text:**
     *   Enter the text you want to analyze into the input text box.
     *   Click the "Submit" button (or wait if live updates are enabled).
-    *   The predicted toxicity scores for each category will be displayed.
+    *   The predicted toxicity score will be displayed.
 
 ## How it Works
 
