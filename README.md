@@ -17,11 +17,34 @@ A simple web application built with Gradio to analyze text input and predict sco
 *   Uses the pre-trained `'original'` model from the `detoxify` library.
 *   Provides an easy-to-use web interface powered by Gradio.
 
-## Demo / Screenshot
+## Project Structure
 
-*(Optional: Add a screenshot of the Gradio interface here)*
-![Screenshot of Toxicity Analyzer Interface](link_to_your_screenshot.png)
-*Replace `link_to_your_screenshot.png` with an actual image URL or relative path if you add one to your repo.*
+```bash
+Toxicity-Analyzer/
+├── .git/                     # Git version control data
+├── .gitignore                # Specifies intentionally untracked files
+├── backend/                  # Contains the server-side application
+│   ├── main.py               # Python script running Gradio/Detoxify server
+│   ├── requirements.txt      # Python dependencies for the backend
+│   ├── Dockerfile            # (Optional) For containerizing the backend
+│   └── ...                   # (Optional) Any other backend config/helper files
+│
+├── extension/                # Contains the browser extension files
+│   ├── manifest.json         # Core configuration file for the extension (required)
+│   ├── popup.html            # HTML for the extension's popup window
+│   ├── popup.js              # JavaScript logic for the popup (API calls, UI updates)
+│   ├── popup.css             # (Optional) CSS styling for the popup
+│   ├── background.js         # (Optional) Background script (Service Worker for MV3) for tasks
+│   ├── content_script.js     # (Optional) JS injected into web pages
+│   ├── icons/                # Directory for extension icons
+│   │   ├── icon16.png
+│   │   ├── icon48.png
+│   │   └── icon128.png
+│   └── ...                   # (Optional) Other JS libraries, CSS files, assets
+│
+├── LICENSE                   # Project license (e.g., MIT)
+└── README.md                 # Main documentation file
+```
 
 ## Installation
 
